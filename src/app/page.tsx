@@ -276,7 +276,7 @@ export default function HomePage() {
         </div>
         <div className="pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
           <p className="text-xs tracking-widest uppercase mb-6" style={{ color: 'var(--accent)' }}>Everything you need</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px" }}>
             {[
               { icon: 'tag', color: 'rgba(92,184,122,0.1)', iconColor: '#5cb87a', title: 'Promo codes', desc: 'Create discount codes for early birds, VIP attendees, or group bookings.' },
               { icon: 'chart', color: 'rgba(66,133,244,0.1)', iconColor: '#4285F4', title: 'Real-time analytics', desc: 'Track ticket sales, revenue, check-in rates, and attendance live.' },
