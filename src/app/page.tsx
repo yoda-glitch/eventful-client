@@ -1,8 +1,26 @@
 'use client';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
+
+function FadeIn({ children, delay = 0, direction = 'up' }: { children: React.ReactNode; delay?: number; direction?: 'up' | 'left' | 'right' | 'none' }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const variants = {
+    hidden: { opacity: 0, y: direction === 'none' ? 0 : 80 },
+    visible: { opacity: 1, y: 0 },
+  };
+  const transition = direction === 'none'
+    ? { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }
+    : { duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] };
+  return (
+    <motion.div ref={ref} variants={variants} initial="hidden" animate={inView ? 'visible' : 'hidden'} transition={transition}>
+      {children}
+    </motion.div>
+  );
+}
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { MapPin, ChevronLeft, ChevronRight, Tag, BarChart3, Bell, Mail } from 'lucide-react';
+import { MapPin, ChevronLeft, ChevronRight, Tag, BarChart3, Bell, Mail, QrCode, CreditCard } from 'lucide-react';
 import api from '@/lib/api';
 
 interface Event {
@@ -18,13 +36,13 @@ interface Event {
 }
 
 const CATEGORY_IMAGES: Record<string, string> = {
-  MUSIC: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1400&q=80',
-  BUSINESS: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1400&q=80',
-  CONFERENCE: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1400&q=80',
-  FOOD_AND_DRINK: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1400&q=80',
-  CONCERT: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1400&q=80',
-  NIGHTLIFE: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1400&q=80',
-  OTHER: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1400&q=80',
+  MUSIC: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1400&q=80',
+  BUSINESS: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1400&q=80',
+  CONFERENCE: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1400&q=80',
+  FOOD_AND_DRINK: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80',
+  CONCERT: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1400&q=80',
+  NIGHTLIFE: 'https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=1400&q=80',
+  OTHER: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1400&q=80',
 };
 
 const CATEGORIES = ['MUSIC', 'BUSINESS', 'CONFERENCE', 'FOOD_AND_DRINK', 'CONCERT', 'NIGHTLIFE'];
@@ -38,20 +56,18 @@ function EventCard({ event }: { event: Event }) {
   const minPrice = event.tiers?.length ? Math.min(...event.tiers.map(t => t.price)) : 0;
   return (
     <Link href={`/events/${event.id}`}>
-      <div className="flex-shrink-0 w-48 rounded-xl overflow-hidden cursor-pointer group" style={{ background: 'var(--bg2)' }}>
-        <div className="relative overflow-hidden" style={{ height: '120px' }}>
-          <img src={image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(6,20,27,0.7) 0%, transparent 60%)' }} />
+      <div className="flex-shrink-0 cursor-pointer group" style={{ width: '285px' }}>
+        <div className="rounded-2xl overflow-hidden" style={{ height: '291px', marginBottom: '12px' }}>
+          <img src={image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
         </div>
-        <div className="p-3">
-          <p className="text-xs font-semibold mb-1 line-clamp-2" style={{ color: 'var(--text-bright)' }}>{event.title}</p>
-          <p className="mb-1" style={{ color: 'var(--accent)', fontSize: '10px' }}>
-            {new Date(event.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short' })} · {event.venue.split(',')[0]}
-          </p>
-          <p className="text-xs font-bold" style={{ color: event.isFree ? '#5cb87a' : 'var(--text-bright)' }}>
-            {event.isFree ? 'Free' : `₦${minPrice.toLocaleString()}`}
-          </p>
-        </div>
+        <p className="font-bold line-clamp-2" style={{ color: 'var(--text-bright)', fontSize: '15px', lineHeight: '1.3', marginBottom: '4px' }}>{event.title}</p>
+        <p style={{ color: 'var(--accent)', fontSize: '13px', marginBottom: '2px' }}>
+          {new Date(event.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' })}
+        </p>
+        <p style={{ color: 'var(--accent)', fontSize: '13px', marginBottom: '4px' }}>{event.venue.split(',')[0]}</p>
+        <p className="font-bold" style={{ color: event.isFree ? '#5cb87a' : 'var(--text-bright)', fontSize: '14px' }}>
+          {event.isFree ? 'Free' : `₦${minPrice.toLocaleString()}`}
+        </p>
       </div>
     </Link>
   );
@@ -138,25 +154,34 @@ export default function HomePage() {
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-      <div className="relative overflow-hidden" style={{ height: '92vh', minHeight: '600px', marginTop: '-56px' }}>
+      <div className="relative overflow-hidden" style={{ height: '80vh', minHeight: '560px', marginTop: '12px', marginLeft: '16px', marginRight: '16px', borderRadius: '16px' }}>
         <div className="absolute inset-0 transition-all duration-700"
-          style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center 30%' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(6,20,27,0.75) 0%, rgba(6,20,27,0.2) 55%, rgba(6,20,27,0) 100%)' }} />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(6,20,27,1) 0%, rgba(6,20,27,0.5) 40%, transparent 70%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(6,20,27,0.85) 0%, rgba(6,20,27,0.3) 30%, transparent 60%)' }} />
         {currentEvent && (
           <div className="absolute bottom-20 left-8 z-10 max-w-lg">
-            <p className="text-xs mb-3 tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.5)' }}>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xs mb-3 tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.5)' }}>
               {CATEGORY_LABELS[currentEvent.category] || currentEvent.category}
-            </p>
-            <h1 className="text-5xl font-bold mb-3 leading-tight" style={{ color: '#fff' }}>{currentEvent.title}</h1>
-            <p className="text-sm mb-6 flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.6)' }}>
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}
+              className="text-5xl font-bold mb-3 leading-tight" style={{ color: '#fff' }}>{currentEvent.title}</motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-sm mb-6 flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.6)' }}>
               <MapPin size={13} />{currentEvent.venue}
-            </p>
-            <Link href={`/events/${currentEvent.id}`}
-              className="inline-block font-bold text-sm px-6 py-3 rounded-lg"
-              style={{ background: '#fff', color: '#06141B' }}>
-              Get Tickets
-            </Link>
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.65 }}>
+              <Link href={`/events/${currentEvent.id}`}
+                className="inline-block font-bold text-sm px-6 py-3 rounded-lg"
+                style={{ background: '#fff', color: '#06141B' }}>
+                Get Tickets
+              </Link>
+            </motion.div>
           </div>
         )}
         <div className="absolute bottom-6 left-0 right-0 flex items-center justify-between px-8 z-10">
@@ -184,48 +209,55 @@ export default function HomePage() {
           <div className="px-8 py-12 text-center text-sm" style={{ color: 'var(--accent)' }}>Loading events...</div>
         ) : (
           eventsByCategory.map(({ label, events: catEvents }) => (
-            <div key={label} className="mb-8">
-              <div className="flex items-center justify-between px-8 mb-4">
+            <FadeIn key={label} delay={0.1}>
+            <div className="mb-8">
+              <div className="flex items-center justify-between px-16 mb-4">
                 <h2 className="text-sm font-bold tracking-wide" style={{ color: 'var(--text-bright)' }}>{label}</h2>
                 <Link href="/events" className="text-xs" style={{ color: 'var(--accent)' }}>See all →</Link>
               </div>
-              <div className="flex gap-4 overflow-x-auto px-8 pb-2" style={{ scrollbarWidth: 'none' }}>
+              <div className="flex gap-4 overflow-x-auto px-16 pb-4" style={{ scrollbarWidth: 'none' }}>
                 {catEvents.map(event => <EventCard key={event.id} event={event} />)}
               </div>
             </div>
+            </FadeIn>
           ))
         )}
       </div>
 
 
       {/* TESTIMONIALS */}
+      <FadeIn delay={0.1}>
       <div className="py-12 px-8 border-t" style={{ borderColor: 'var(--border)' }}>
         <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>What organizers say</p>
-        <h2 className="text-2xl font-bold mb-10" style={{ color: 'var(--text-bright)' }}>Trusted by organizers across Nigeria</h2>
+        <h2 className="text-2xl font-bold mb-10" style={{ color: 'var(--text-bright)', fontFamily: 'var(--font-heading)' }}>Trusted by organizers everywhere</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { quote: 'We sold out 500 tickets in 3 days. The QR scanning at the entrance was seamless — no long queues, no fake tickets.', name: 'Chidi Okonkwo', role: 'Founder, Lagos Live Events', initials: 'CO' },
-            { quote: 'Setting up our conference ticketing took less than 20 minutes. Payments landed in our account the same day.', name: 'Amara Nwosu', role: 'Head of Operations, TechFest Abuja', initials: 'AN' },
-            { quote: "Finally a Nigerian platform that actually works. We've hosted 3 events and every single one sold out.", name: 'Tunde Adeyemi', role: 'Event Director, PHC Music Series', initials: 'TA' },
+            { quote: 'We sold out 500 tickets in 3 days. The QR scanning at the entrance was seamless — no long queues, no fake tickets.', name: 'John Doe', role: 'Founder, Lagos Live Events', initials: 'JD' },
+            { quote: 'I was skeptical at first but Eventful blew me away. Ticket sales went live in minutes and the dashboard gave me everything I needed in real time.', name: 'Bitrus Jeb', role: 'Head of Operations, TechFest', initials: 'BJ' },
+            { quote: "Finally a platform that actually works. We have hosted 3 events and every single one sold out. Highly recommend.", name: 'Mark Johnson', role: 'Event Director, PHC Music Series', initials: 'MJ' },
           ].map((t, i) => (
             <div key={i} className="rounded-xl p-6 border" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--accent)' }}>"{t.quote}"</p>
+              <div style={{ display: 'flex', gap: 2, marginBottom: 16 }}>
+                {[1,2,3,4,5].map(s => <span key={s} style={{ color: '#f0a500', fontSize: 14 }}>&#9733;</span>)}
+              </div>
+              <p className="leading-relaxed mb-6" style={{ color: 'var(--accent)', fontSize: 14 }}>"{t.quote}"</p>
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-                  style={{ background: 'var(--bg3)', color: 'var(--text-bright)', border: '0.5px solid var(--border)' }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0"
+                  style={{ background: 'var(--bg3)', color: 'var(--text-bright)', border: '0.5px solid var(--border)', fontSize: 13 }}>
                   {t.initials}
                 </div>
                 <div>
-                  <p className="text-xs font-semibold" style={{ color: 'var(--text-bright)' }}>{t.name}</p>
-                  <p className="text-xs" style={{ color: 'var(--accent)' }}>{t.role}</p>
+                  <p className="font-semibold" style={{ color: 'var(--text-bright)', fontSize: 14 }}>{t.name}</p>
+                  <p style={{ color: 'var(--accent)', fontSize: 12 }}>{t.role}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-
+      </FadeIn>
       {/* HOW IT WORKS */}
+      <FadeIn delay={0.1}>
       <div className="py-12 px-8 border-t" style={{ borderColor: 'var(--border)' }}>
         <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>How it works</p>
         <h2 className="text-2xl font-bold mb-10" style={{ color: 'var(--text-bright)' }}>Sell out your event in 3 steps</h2>
@@ -244,30 +276,36 @@ export default function HomePage() {
         </div>
         <div className="pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
           <p className="text-xs tracking-widest uppercase mb-6" style={{ color: 'var(--accent)' }}>Everything you need</p>
-          <div className="grid grid-cols-2 gap-4" style={{ maxWidth: "600px" }}>
+          <div className="grid grid-cols-3 gap-5">
             {[
-              { icon: 'tag', color: 'rgba(92,184,122,0.1)', iconColor: '#5cb87a', title: 'Promo codes', desc: 'Create discount codes for early birds or VIP attendees.' },
-              { icon: 'chart', color: 'rgba(66,133,244,0.1)', iconColor: '#4285F4', title: 'Real-time analytics', desc: 'Track ticket sales, revenue, and attendance live.' },
-              { icon: 'bell', color: 'rgba(240,165,0,0.1)', iconColor: '#f0a500', title: 'Instant notifications', desc: 'Get alerted the moment someone buys a ticket.' },
-              { icon: 'mail', color: 'rgba(224,85,85,0.1)', iconColor: '#e05555', title: 'Contact organizer', desc: 'Attendees can reach you directly from your profile.' },
+              { icon: 'tag', color: 'rgba(92,184,122,0.1)', iconColor: '#5cb87a', title: 'Promo codes', desc: 'Create discount codes for early birds, VIP attendees, or group bookings.' },
+              { icon: 'chart', color: 'rgba(66,133,244,0.1)', iconColor: '#4285F4', title: 'Real-time analytics', desc: 'Track ticket sales, revenue, check-in rates, and attendance live.' },
+              { icon: 'bell', color: 'rgba(240,165,0,0.1)', iconColor: '#f0a500', title: 'Instant notifications', desc: 'Get alerted the moment someone buys a ticket or scans in at the door.' },
+              { icon: 'mail', color: 'rgba(224,85,85,0.1)', iconColor: '#e05555', title: 'Contact organizer', desc: 'Attendees can reach you directly from your event or organizer profile.' },
+              { icon: 'qr', color: 'rgba(139,92,246,0.1)', iconColor: '#8b5cf6', title: 'QR ticket scanning', desc: 'Every ticket gets a unique QR code. Scan at the entrance — fast, secure, no fakes.' },
+              { icon: 'card', color: 'rgba(20,184,166,0.1)', iconColor: '#14b8a6', title: 'Paystack payments', desc: 'Accept payments instantly. Money lands in your account with zero delays.' },
             ].map((f, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 rounded-xl" style={{ background: 'var(--bg3)' }}>
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: f.color }}>
-                  {f.icon === 'tag' && <Tag size={16} style={{ color: f.iconColor }} />}
-                  {f.icon === 'chart' && <BarChart3 size={16} style={{ color: f.iconColor }} />}
-                  {f.icon === 'bell' && <Bell size={16} style={{ color: f.iconColor }} />}
-                  {f.icon === 'mail' && <Mail size={16} style={{ color: f.iconColor }} />}
+              <div key={i} className="flex items-start gap-4 p-5 rounded-2xl" style={{ background: 'var(--bg3)' }}>
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: f.color }}>
+                  {f.icon === 'tag' && <Tag size={20} style={{ color: f.iconColor }} />}
+                  {f.icon === 'chart' && <BarChart3 size={20} style={{ color: f.iconColor }} />}
+                  {f.icon === 'bell' && <Bell size={20} style={{ color: f.iconColor }} />}
+                  {f.icon === 'mail' && <Mail size={20} style={{ color: f.iconColor }} />}
+                  {f.icon === 'qr' && <QrCode size={20} style={{ color: f.iconColor }} />}
+                  {f.icon === 'card' && <CreditCard size={20} style={{ color: f.iconColor }} />}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-bright)' }}>{f.title}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--accent)' }}>{f.desc}</p>
+                  <p className="font-semibold mb-1" style={{ color: 'var(--text-bright)', fontSize: '15px' }}>{f.title}</p>
+                  <p className="leading-relaxed" style={{ color: 'var(--accent)', fontSize: '13px' }}>{f.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+            </FadeIn>
             {/* STATS */}
+            <FadeIn delay={0.1}>
       <div className="grid grid-cols-3 border-t border-b" style={{ borderColor: 'var(--border)' }}>
         {[
           { target: 20, suffix: '+', label: 'Events hosted' },
@@ -281,7 +319,9 @@ export default function HomePage() {
         ))}
       </div>
 
+      </FadeIn>
       {/* ORGANIZER CTA */}
+      <FadeIn direction="none" delay={0.1}>
       <div className="relative overflow-hidden px-8 py-16 border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0d2535 0%, var(--bg) 60%)' }} />
         <div className="relative z-10 max-w-lg">
@@ -300,17 +340,10 @@ export default function HomePage() {
               Browse Events
             </Link>
           </div>
-          <div className="flex flex-col gap-2">
-            {['Free to create an account', 'Paystack payments — money goes directly to you', 'QR ticket scanning included', 'Promo & discount codes', 'Real-time sales analytics', 'Instant notifications on every sale'].map((item, i) => (
-              <p key={i} className="text-xs flex items-center gap-2" style={{ color: '#fff' }}>
-                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', flexShrink: 0 }} />
-                {item}
-              </p>
-            ))}
-          </div>
         </div>
       </div>
 
+      </FadeIn>
       <footer className="border-t py-8 px-8" style={{ borderColor: 'var(--border)' }}>
         <div className="flex justify-between items-center flex-wrap gap-4">
           <div className="flex items-center gap-2">
@@ -322,7 +355,21 @@ export default function HomePage() {
               <span key={l} className="text-xs cursor-pointer hover:text-white transition-colors" style={{ color: 'var(--accent)' }}>{l}</span>
             ))}
           </div>
-          <p className="text-xs" style={{ color: 'var(--accent)' }}>© 2026 Eventful · Built for Africa</p>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
+
+            <p style={{ color: 'var(--accent)', fontSize: 13 }}>© 2026 Eventful · Built for Africa</p>
+
+            <p style={{ color: 'var(--accent)', fontSize: 13 }}>Built by <a href="https://github.com/yoda-glitch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-bright)', textDecoration: 'none', fontWeight: 600 }}>Michael Vondee</a></p>
+
+            <div style={{ display: 'flex', gap: 14, marginTop: 2 }}>
+
+              <a href="https://github.com/yoda-glitch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontSize: 13, textDecoration: 'none' }}>GitHub</a>
+
+              <a href="https://www.linkedin.com/in/michael-vondee/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontSize: 13, textDecoration: 'none' }}>LinkedIn</a>
+
+            </div>
+
+          </div>
         </div>
       </footer>
     </div>
