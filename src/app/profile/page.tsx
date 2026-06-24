@@ -130,7 +130,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        <div className="grid gap-6" style={{ gridTemplateColumns: '240px 1fr' }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(240px, 100%), 1fr))", gap: "24px" }}>
 
           {/* SIDEBAR */}
           <div className="rounded-2xl border p-5" style={{ background: 'var(--bg2)', borderColor: 'var(--border)', height: 'fit-content' }}>
