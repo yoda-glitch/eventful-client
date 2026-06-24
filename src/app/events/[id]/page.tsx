@@ -29,7 +29,7 @@ interface Event {
   galleryImages?: string[];
   status: string;
   tiers: Tier[];
-  organizer?: { id: string; // organizer id firstName: string; lastName: string; email: string; avatarUrl?: string; companyName?: string };
+  organizer?: { id: string; firstName: string; lastName: string; email: string; avatarUrl?: string; companyName?: string };
 }
 
 const CATEGORY_IMAGES: Record<string, string> = {
