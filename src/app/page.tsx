@@ -230,7 +230,7 @@ export default function HomePage() {
       <div className="py-12 px-8 border-t" style={{ borderColor: 'var(--border)' }}>
         <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>What organizers say</p>
         <h2 className="text-2xl font-bold mb-10" style={{ color: 'var(--text-bright)', fontFamily: 'var(--font-heading)' }}>Trusted by organizers everywhere</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px" }}>
           {[
             { quote: 'We sold out 500 tickets in 3 days. The QR scanning at the entrance was seamless — no long queues, no fake tickets.', name: 'John Doe', role: 'Founder, Lagos Live Events', initials: 'JD' },
             { quote: 'I was skeptical at first but Eventful blew me away. Ticket sales went live in minutes and the dashboard gave me everything I needed in real time.', name: 'Bitrus Jeb', role: 'Head of Operations, TechFest', initials: 'BJ' },
@@ -261,7 +261,7 @@ export default function HomePage() {
       <div className="py-12 px-8 border-t" style={{ borderColor: 'var(--border)' }}>
         <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>How it works</p>
         <h2 className="text-2xl font-bold mb-10" style={{ color: 'var(--text-bright)' }}>Sell out your event in 3 steps</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "32px", marginBottom: "40px" }}>
           {[
             { num: '01', title: 'Create your event', desc: 'Set up your event page in minutes. Add ticket tiers, gallery images, and event details.' },
             { num: '02', title: 'Sell tickets instantly', desc: 'Accept payments via Paystack. Money lands in your account directly — no delays.' },
