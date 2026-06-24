@@ -168,7 +168,7 @@ export default function HomePage() {
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}
-              className="text-5xl font-bold mb-3 leading-tight" style={{ color: '#fff' }}>{currentEvent.title}</motion.h1>
+              className="text-3xl md:text-5xl font-bold mb-3 leading-tight" style={{ color: '#fff' }}>{currentEvent.title}</motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.5 }}
               className="text-sm mb-6 flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.6)' }}>
@@ -276,7 +276,7 @@ export default function HomePage() {
         </div>
         <div className="pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
           <p className="text-xs tracking-widest uppercase mb-6" style={{ color: 'var(--accent)' }}>Everything you need</p>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               { icon: 'tag', color: 'rgba(92,184,122,0.1)', iconColor: '#5cb87a', title: 'Promo codes', desc: 'Create discount codes for early birds, VIP attendees, or group bookings.' },
               { icon: 'chart', color: 'rgba(66,133,244,0.1)', iconColor: '#4285F4', title: 'Real-time analytics', desc: 'Track ticket sales, revenue, check-in rates, and attendance live.' },
@@ -345,7 +345,7 @@ export default function HomePage() {
 
       </FadeIn>
       <footer className="border-t py-8 px-8" style={{ borderColor: 'var(--border)' }}>
-        <div className="flex justify-between items-center flex-wrap gap-4">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded flex items-center justify-center font-bold text-xs" style={{ background: 'var(--text-bright)', color: 'var(--bg)' }}>E</div>
             <span className="text-xs font-bold tracking-widest uppercase" style={{ color: 'var(--text-bright)' }}>Eventful</span>
