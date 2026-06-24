@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #06141B;
+  --bg2: #0e1e27;
+  --bg3: #253745;
+  --card: #1D1D1D;
+  --card2: #2F2F2F;
+  --pill: #3B3B3A;
+  --border: rgba(204, 208, 207, 0.1);
+  --text: #4A5C6A;
+  --text-bright: #CCD0CF;
+  --accent: #9BA8AB;
+  --green: #5cb87a;
+  --red: #e05555;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-theme='light'] {
+  --bg: #F0F4F8;
+  --bg2: #FFFFFF;
+  --bg3: #E2E8F0;
+  --card: #FFFFFF;
+  --card2: #F7FAFC;
+  --pill: #E2E8F0;
+  --border: rgba(0, 0, 0, 0.15);
+  --text: #4A5568;
+  --text-bright: #1A202C;
+  --accent: #718096;
+  --green: #38A169;
+  --red: #E53E3E;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-bright);
+  font-family: var(--font-inter), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading), serif;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg3);
+  border-radius: 3px;
 }
