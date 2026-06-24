@@ -50,7 +50,7 @@ const CATEGORIES = [
   { key: 'OTHER', label: 'Other', icon: <Palette size={22} /> },
 ];
 
-export default function EventsPage() {
+function EventsPageInner() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -241,5 +241,13 @@ export default function EventsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function EventsPage() {
+  return (
+    <Suspense>
+      <EventsPageInner />
+    </Suspense>
   );
 }

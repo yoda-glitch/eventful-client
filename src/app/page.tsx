@@ -9,8 +9,8 @@ function FadeIn({ children, delay = 0, direction = 'up' }: { children: React.Rea
     visible: { opacity: 1, y: 0 },
   };
   const transition = direction === 'none'
-    ? { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }
-    : { duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] };
+    ? { duration: 0.8, delay, ease: 'easeOut' as const }
+    : { duration: 1.1, delay, ease: 'easeOut' as const };
   return (
     <motion.div ref={ref} variants={variants} initial="hidden" animate={inView ? 'visible' : 'hidden'} transition={transition}>
       {children}

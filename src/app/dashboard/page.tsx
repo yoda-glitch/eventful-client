@@ -1,4 +1,5 @@
 'use client';
+import { Suspense } from 'react';
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -41,7 +42,7 @@ const CATEGORY_IMAGES: Record<string, string> = {
   OTHER: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&q=80',
 };
 
-export default function DashboardPage() {
+function DashboardPageInner() {
   const { user, loading: authLoading, isAuthenticated } = useAuth();
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
@@ -406,5 +407,13 @@ export default function DashboardPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense>
+      <DashboardPageInner />
+    </Suspense>
   );
 }

@@ -35,7 +35,7 @@ export default function RegisterPage() {
       setSuccess(true);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Registration failed. Please try again.');
-      setStep(1);
+      
     } finally {
       setLoading(false);
     }

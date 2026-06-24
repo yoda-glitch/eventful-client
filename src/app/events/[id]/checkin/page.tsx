@@ -1,4 +1,5 @@
 'use client';
+import { Suspense } from 'react';
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { Search, QrCode, CheckCircle, Clock, Users, TrendingUp, ChevronLeft, RefreshCw } from 'lucide-react';
@@ -23,7 +24,7 @@ interface CheckinData {
   attendees: Attendee[];
 }
 
-export default function CheckinPage() {
+function CheckinPageInner() {
   const { id } = useParams();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -192,5 +193,13 @@ export default function CheckinPage() {
 
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
+  );
+}
+
+export default function CheckinPage() {
+  return (
+    <Suspense>
+      <CheckinPageInner />
+    </Suspense>
   );
 }

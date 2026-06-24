@@ -1,10 +1,11 @@
 'use client';
+import { Suspense } from 'react';
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import { Loader2 } from 'lucide-react';
 
-export default function GoogleCallbackPage() {
+function GoogleCallbackInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { loginWithTokens } = useAuth();
@@ -31,5 +32,13 @@ export default function GoogleCallbackPage() {
       <p style={{ color: 'var(--accent)', fontSize: 14 }}>Signing you in with Google...</p>
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
+  );
+}
+
+export default function GoogleCallbackPage() {
+  return (
+    <Suspense>
+      <GoogleCallbackInner />
+    </Suspense>
   );
 }
