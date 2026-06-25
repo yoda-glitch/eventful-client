@@ -362,7 +362,6 @@ export default function EventDetailPage() {
               </a>
             </div>
           </div>
-          </div>
         </div>
 
         {/* GALLERY */}
