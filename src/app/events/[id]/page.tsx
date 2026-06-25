@@ -250,11 +250,6 @@ export default function EventDetailPage() {
         </div>
       </div>
 
-      {/* BLUR TRANSITION */}
-      <div className="relative overflow-hidden" style={{ height: '50px' }}>
-        <div className="absolute" style={{ inset: '-20px', backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center bottom', filter: 'blur(20px) brightness(0.4)', transform: 'scale(1.1)' }} />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(6,20,27,0) 0%, rgba(6,20,27,1) 100%)' }} />
-      </div>
 
       {/* TICKET TIERS */}
       <div className="px-5 py-5 border-b" style={{ borderColor: 'var(--border)' }}>
@@ -442,25 +437,21 @@ export default function EventDetailPage() {
       {similarEvents.length > 0 && (
         <div className="border-t pt-6 pb-4" style={{ borderColor: 'var(--border)' }}>
           <h3 className="text-base font-bold px-5 mb-4" style={{ color: 'var(--text-bright)' }}>You might also like</h3>
-          <div className="flex gap-3 overflow-x-auto px-5 pb-2" style={{ scrollbarWidth: 'none' }}>
+          <div className="grid grid-cols-3 gap-4 px-5">
             {similarEvents.map(ev => {
               const evImage = ev.coverImageUrl || CATEGORY_IMAGES[ev.category] || CATEGORY_IMAGES.OTHER;
               const minPrice = ev.tiers?.length ? Math.min(...ev.tiers.map((t: any) => t.price)) : 0;
               return (
                 <Link href={`/events/${ev.id}`} key={ev.id}>
-                  <div className="min-w-44 rounded-xl overflow-hidden border flex-shrink-0" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
-                    <div className="h-24 overflow-hidden">
-                      <img src={evImage} alt={ev.title} className="w-full h-full object-cover opacity-80" />
+                  <div className="cursor-pointer group">
+                    <div className="rounded-2xl overflow-hidden mb-2" style={{ height: '140px' }}>
+                      <img src={evImage} alt={ev.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
-                    <div className="p-3">
-                      <p className="text-xs font-semibold mb-1 line-clamp-2" style={{ color: 'var(--text-bright)' }}>{ev.title}</p>
-                      <p className="text-xs mb-2" style={{ color: 'var(--accent)' }}>{new Date(ev.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short' })} · {ev.venue.split(',')[0]}</p>
-                      <p className="text-sm font-bold" style={{ color: 'var(--text-bright)' }}>{ev.isFree ? 'Free' : `₦${minPrice.toLocaleString()}`}</p>
-                    </div>
+                    <p className="font-bold line-clamp-2 mb-1" style={{ color: 'var(--text-bright)', fontSize: '13px', lineHeight: '1.3' }}>{ev.title}</p>
+                    <p style={{ color: 'var(--accent)', fontSize: '11px', marginBottom: '2px' }}>{new Date(ev.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short' })} · {ev.venue.split(',')[0]}</p>
+                    <p className="font-bold" style={{ color: ev.isFree ? '#5cb87a' : 'var(--text-bright)', fontSize: '12px' }}>{ev.isFree ? 'Free' : `₦${minPrice.toLocaleString()}`}</p>
                   </div>
                 </Link>
-              );
-            })}
           </div>
         </div>
       )}
