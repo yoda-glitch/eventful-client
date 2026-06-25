@@ -452,6 +452,8 @@ export default function EventDetailPage() {
                     <p className="font-bold" style={{ color: ev.isFree ? '#5cb87a' : 'var(--text-bright)', fontSize: '12px' }}>{ev.isFree ? 'Free' : `₦${minPrice.toLocaleString()}`}</p>
                   </div>
                 </Link>
+              );
+            })}
           </div>
         </div>
       )}
