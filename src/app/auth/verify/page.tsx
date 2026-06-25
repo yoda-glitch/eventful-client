@@ -15,7 +15,7 @@ function VerifyEmailPageInner() {
 
   useEffect(() => {
     if (token) {
-      api.get('/auth/verify-email?token=' + token)
+      api.get('/auth/verify-email/' + token)
         .then(() => {
           setStatus('success');
           let count = 3;
