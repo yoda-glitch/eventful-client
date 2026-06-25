@@ -148,7 +148,7 @@ export default function ProfilePage() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       {/* Mobile/Tablet top bar */}
-      <div className="lg:hidden flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: 'var(--border)' }}>
+      <div className="flex items-center justify-between px-4 py-3 border-b" style={{ display: typeof window !== "undefined" && window.innerWidth >= 1024 ? "none" : "flex", borderColor: "var(--border)" }} style={{ borderColor: 'var(--border)' }}>
         <button onClick={() => router.back()} className="flex items-center gap-1 text-xs" style={{ color: 'var(--accent)' }}>
           <ChevronLeft size={14} /> Back
         </button>
@@ -160,7 +160,7 @@ export default function ProfilePage() {
 
       {/* Drawer overlay */}
       {drawerOpen && (
-        <div className="lg:hidden" style={{ position: 'fixed', inset: 0, zIndex: 50 }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 50 }}>
           <div onClick={() => setDrawerOpen(false)} style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
           <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 260, background: 'var(--bg2)', borderRight: '1px solid var(--border)', padding: 20, overflowY: 'auto' }}>
             <div className="flex justify-end mb-4">
@@ -183,7 +183,7 @@ export default function ProfilePage() {
 
         <div className="flex gap-6">
           {/* Desktop Sidebar */}
-          <div className="hidden lg:block rounded-2xl border p-5 flex-shrink-0" style={{ background: 'var(--bg2)', borderColor: 'var(--border)', height: 'fit-content', width: 240 }}>
+          <div className="rounded-2xl border p-5 flex-shrink-0" style={{ display: typeof window !== "undefined" && window.innerWidth >= 1024 ? "block" : "none" }} style={{ background: 'var(--bg2)', borderColor: 'var(--border)', height: 'fit-content', width: 240 }}>
             <SidebarContent />
           </div>
 
