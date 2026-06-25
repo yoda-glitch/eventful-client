@@ -148,7 +148,7 @@ export default function ProfilePage() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       {/* Mobile/Tablet top bar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b" style={{ display: typeof window !== "undefined" && window.innerWidth >= 1024 ? "none" : "flex", borderColor: "var(--border)" }} style={{ borderColor: 'var(--border)' }}>
+      <div className="flex items-center justify-between px-4 py-3 border-b" style={{ display: typeof window !== "undefined" && window.innerWidth >= 1024 ? "none" : "flex", borderColor: "var(--border)" >}}>
         <button onClick={() => router.back()} className="flex items-center gap-1 text-xs" style={{ color: 'var(--accent)' }}>
           <ChevronLeft size={14} /> Back
         </button>
