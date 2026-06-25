@@ -113,7 +113,7 @@ function DashboardPageInner() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <div className="border-b py-8" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
         <div className="max-w-6xl mx-auto px-4">
-          <div className="flex justify-between items-start">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
             <div>
               <p className="text-xs tracking-widest uppercase mb-1" style={{ color: 'var(--accent)' }}>Welcome back</p>
               <h1 className="text-2xl font-bold" style={{ color: 'var(--text-bright)' }}>
@@ -132,7 +132,7 @@ function DashboardPageInner() {
               </>
             )}
           </div>
-          <div className="grid grid-cols-4 gap-4 mt-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
             {(isOrganizer ? [
               { label: 'Total Events', value: totalEventsCreated, icon: <Calendar size={20} />, color: '#5cb87a' },
               { label: 'Tickets Sold', value: totalTicketsSold, icon: <Ticket size={20} />, color: 'var(--text-bright)' },
@@ -142,7 +142,6 @@ function DashboardPageInner() {
               { label: 'Total Tickets', value: totalTickets, icon: <Ticket size={20} />, color: '#5cb87a' },
               { label: 'Upcoming Events', value: upcomingEvents, icon: <Calendar size={20} />, color: 'var(--text-bright)' },
               { label: 'Amount Spent', value: `₦${totalSpent.toLocaleString()}`, icon: <BarChart3 size={20} />, color: '#9BA8AB' },
-              { label: 'Tickets Scanned', value: scannedTickets, icon: <QrCode size={20} />, color: '#e05555' },
             ]).map((stat, i) => (
               <div key={i} className="rounded-xl p-4 border" style={{ background: 'var(--card)', borderColor: 'var(--border)' }}>
                 <div className="flex justify-between items-start mb-3">
@@ -201,7 +200,7 @@ function DashboardPageInner() {
                         )}
                       </div>
                       <div className="p-4 flex-1">
-                        <div className="flex justify-between items-start">
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                           <div>
                             <p className="font-semibold mb-1" style={{ color: 'var(--text-bright)' }}>{event.title}</p>
                             <p className="text-xs mb-1 flex items-center gap-1" style={{ color: 'var(--accent)' }}>
@@ -250,7 +249,7 @@ function DashboardPageInner() {
               </Link>
             </div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "16px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
               {myEvents.map((event: any) => (
                 <div key={event.id} className="rounded-xl border p-4"
                   style={{ background: 'var(--card)', borderColor: 'var(--border)' }}>
