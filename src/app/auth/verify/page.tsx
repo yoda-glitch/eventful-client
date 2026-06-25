@@ -39,7 +39,7 @@ function VerifyEmailPageInner() {
     } else {
       setStatus('error');
     }
-  }, [token]);
+  }, [token, statusParam]);
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'var(--bg)' }}>
