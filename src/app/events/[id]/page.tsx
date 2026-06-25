@@ -296,75 +296,71 @@ export default function EventDetailPage() {
 
         {/* DESCRIPTION */}
         {event.description && (
-          <div className="grid gap-5 pb-6 border-b mb-6" style={{ gridTemplateColumns: '110px 1fr', borderColor: 'var(--border)' }}>
-            <p className="text-xs" style={{ color: 'var(--accent)' }}>Description</p>
+          <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
+            <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>Description</p>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--accent)', lineHeight: 1.8 }}>{event.description}</p>
           </div>
         )}
 
         {/* COUNTDOWN */}
-        <div className="grid gap-5 pb-6 border-b mb-6" style={{ gridTemplateColumns: '110px 1fr', borderColor: 'var(--border)' }}>
-          <p className="text-xs" style={{ color: 'var(--accent)' }}>Starts in</p>
+        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
+          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Starts in</p>
           <div className="grid grid-cols-4 gap-2">
             {[['days', countdown.days], ['hours', countdown.hours], ['mins', countdown.mins], ['secs', countdown.secs]].map(([label, val]) => (
               <div key={label} className="rounded-lg p-2 text-center border" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
                 <span className="text-xl font-bold block" style={{ color: 'var(--text-bright)' }}>{val}</span>
-                <span className="text-xs uppercase tracking-wider" style={{ color: 'var(--accent)', fontSize: '9px' }}>{label}</span>
+                <span className="uppercase tracking-wider" style={{ color: 'var(--accent)', fontSize: '9px' }}>{label}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* EVENT INFO */}
-        <div className="grid gap-5 pb-6 border-b mb-6" style={{ gridTemplateColumns: '110px 1fr', borderColor: 'var(--border)' }}>
-          <p className="text-xs" style={{ color: 'var(--accent)' }}>Date & time</p>
-          <div>
-            <div className="flex gap-4 mb-2">
-              <div className="rounded-lg p-3 border flex-1 text-center" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
-                <p className="text-lg font-bold" style={{ color: 'var(--text-bright)' }}>{new Date(event.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short' })}</p>
-                <p className="text-xs" style={{ color: 'var(--accent)' }}>{new Date(event.startDate).toLocaleTimeString('en-NG', { hour: '2-digit', minute: '2-digit' })}</p>
-              </div>
-              <div className="flex items-center" style={{ color: 'var(--accent)', fontSize: '12px' }}>to</div>
-              <div className="rounded-lg p-3 border flex-1 text-center" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
-                <p className="text-lg font-bold" style={{ color: 'var(--text-bright)' }}>{new Date(event.endDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short' })}</p>
-                <p className="text-xs" style={{ color: 'var(--accent)' }}>{new Date(event.endDate).toLocaleTimeString('en-NG', { hour: '2-digit', minute: '2-digit' })}</p>
-              </div>
+        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
+          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Date & time</p>
+          <div className="flex gap-4 mb-2">
+            <div className="rounded-lg p-3 border flex-1 text-center" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
+              <p className="text-lg font-bold" style={{ color: 'var(--text-bright)' }}>{new Date(event.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short' })}</p>
+              <p className="text-xs" style={{ color: 'var(--accent)' }}>{new Date(event.startDate).toLocaleTimeString('en-NG', { hour: '2-digit', minute: '2-digit' })}</p>
             </div>
-            <p className="text-xs" style={{ color: 'var(--accent)' }}>(GMT+01:00) Nigeria</p>
+            <div className="flex items-center" style={{ color: 'var(--accent)', fontSize: '12px' }}>to</div>
+            <div className="rounded-lg p-3 border flex-1 text-center" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
+              <p className="text-lg font-bold" style={{ color: 'var(--text-bright)' }}>{new Date(event.endDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short' })}</p>
+              <p className="text-xs" style={{ color: 'var(--accent)' }}>{new Date(event.endDate).toLocaleTimeString('en-NG', { hour: '2-digit', minute: '2-digit' })}</p>
+            </div>
           </div>
+          <p className="text-xs" style={{ color: 'var(--accent)' }}>(GMT+01:00) Nigeria</p>
         </div>
 
         {/* LOCATION MAP */}
-        <div className="grid gap-5 pb-6 border-b mb-6" style={{ gridTemplateColumns: '110px 1fr', borderColor: 'var(--border)' }}>
-          <p className="text-xs" style={{ color: 'var(--accent)' }}>Location</p>
-          <div>
-            <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-bright)' }}>{event.venue.split(',')[0]}</p>
-            <p className="text-xs mb-3" style={{ color: 'var(--accent)' }}>{event.venue}</p>
-            <div className="rounded-xl overflow-hidden border" style={{ borderColor: 'var(--border)' }}>
-              <iframe
-                src={mapUrl}
-                width="100%"
-                height="180"
-                style={{ border: 0, display: 'block' }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`Map of ${event.venue}`}
-              />
-              <div className="flex justify-between items-center px-3 py-2" style={{ background: 'var(--bg2)' }}>
-                <a href={`https://maps.google.com/maps?q=${encodeURIComponent(event.venue)}`} target="_blank" rel="noopener noreferrer"
-                  className="text-xs flex items-center gap-1 px-3 py-1.5 rounded border"
-                  style={{ borderColor: 'var(--border)', color: 'var(--accent)', background: 'transparent' }}>
-                  Open Maps ↗
-                </a>
-              </div>
+        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
+          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Location</p>
+          <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-bright)' }}>{event.venue.split(',')[0]}</p>
+          <p className="text-xs mb-3" style={{ color: 'var(--accent)' }}>{event.venue}</p>
+          <div className="rounded-xl overflow-hidden border" style={{ borderColor: 'var(--border)' }}>
+            <iframe
+              src={mapUrl}
+              width="100%"
+              height="180"
+              style={{ border: 0, display: 'block' }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={`Map of ${event.venue}`}
+            />
+            <div className="flex justify-between items-center px-3 py-2" style={{ background: 'var(--bg2)' }}>
+              <a href={`https://maps.google.com/maps?q=${encodeURIComponent(event.venue)}`} target="_blank" rel="noopener noreferrer"
+                className="text-xs flex items-center gap-1 px-3 py-1.5 rounded border"
+                style={{ borderColor: 'var(--border)', color: 'var(--accent)', background: 'transparent' }}>
+                Open Maps ↗
+              </a>
             </div>
           </div>
         </div>
 
         {/* GALLERY */}
         {event.galleryImages && event.galleryImages.length > 0 && (
-          <div className="grid gap-5 pb-6 border-b mb-6" style={{ gridTemplateColumns: '110px 1fr', borderColor: 'var(--border)' }}>
-            <p className="text-xs" style={{ color: 'var(--accent)' }}>Gallery</p>
+          <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
+            <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Gallery</p>
             <div className="grid grid-cols-2 gap-2">
               {event.galleryImages.map((img, i) => (
                 <div key={i} className="rounded-lg overflow-hidden" style={{ height: '130px', cursor: 'pointer' }}
@@ -379,8 +375,8 @@ export default function EventDetailPage() {
         )}
 
         {/* SHARE */}
-        <div className="grid gap-5 pb-6 border-b mb-6" style={{ gridTemplateColumns: '110px 1fr', borderColor: 'var(--border)' }}>
-          <p className="text-xs" style={{ color: 'var(--accent)' }}>Share event</p>
+        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
+          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Share event</p>
           <div className="flex gap-3">
             <button onClick={() => handleShare('whatsapp')} title="Share on WhatsApp"
               className="w-10 h-10 rounded-full flex items-center justify-center border transition-all hover:scale-110"
@@ -407,8 +403,8 @@ export default function EventDetailPage() {
 
         {/* ORGANIZER */}
         {event.organizer && (
-          <div className="grid gap-5 pb-6" style={{ gridTemplateColumns: '110px 1fr' }}>
-            <p className="text-xs" style={{ color: 'var(--accent)' }}>Organized by</p>
+          <div className="pb-6" style={{ borderColor: 'var(--border)' }}>
+            <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Organized by</p>
             <Link href={`/organizer/${event.organizer.id}`} className="flex items-center gap-3 group">
               <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center text-sm font-bold flex-shrink-0"
                 style={{ background: 'var(--bg3)', color: 'var(--text-bright)' }}>
@@ -432,7 +428,6 @@ export default function EventDetailPage() {
           <div className="px-4 py-3 rounded-lg text-sm mt-4" style={{ background: 'rgba(224,85,85,0.1)', color: '#e05555' }}>{error}</div>
         )}
       </div>
-
       {/* SIMILAR EVENTS */}
       {similarEvents.length > 0 && (
         <div className="border-t pt-6 pb-4" style={{ borderColor: 'var(--border)' }}>
