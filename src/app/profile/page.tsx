@@ -183,7 +183,7 @@ export default function ProfilePage() {
 
         <div className="flex gap-6">
           {/* Desktop Sidebar */}
-          <div className="rounded-2xl border p-5 flex-shrink-0" style={{ display: typeof window !== "undefined" && window.innerWidth >= 1024 ? "block" : "none" }} style={{ background: 'var(--bg2)', borderColor: 'var(--border)', height: 'fit-content', width: 240 }}>
+          <div className="rounded-2xl border p-5 flex-shrink-0" style={{ display: typeof window !== "undefined" && window.innerWidth >= 1024 ? "block" : "none", background: "var(--bg2)", borderColor: "var(--border)", height: "fit-content", width: 240 }}>
             <SidebarContent />
           </div>
 
