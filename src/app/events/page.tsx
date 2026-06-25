@@ -182,6 +182,7 @@ function EventsPageInner() {
               );
             })}
           </div>
+        )}
 
         {/* PAGINATION */}
         {totalPages > 1 && (
