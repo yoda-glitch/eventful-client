@@ -157,8 +157,8 @@ export default function OrganizerProfilePage() {
           <button key={t} onClick={() => setTab(t)}
             className="text-xs py-3 mr-6 font-semibold capitalize border-b-2 transition-all"
             style={{
-              borderColor: tab === t ? 'var(--bg)' : 'transparent',
-              color: tab === t ? 'var(--bg)' : 'var(--accent)',
+              borderColor: tab === t ? 'var(--text-bright)' : 'transparent',
+              color: tab === t ? 'var(--text-bright)' : 'var(--accent)',
             }}>
             {t} events {t === 'upcoming' ? `(${upcomingEvents.length})` : `(${pastEvents.length})`}
           </button>
