@@ -141,7 +141,6 @@ function DashboardPageInner() {
             ] : [
               { label: 'Total Tickets', value: totalTickets, icon: <Ticket size={20} />, color: '#5cb87a' },
               { label: 'Upcoming Events', value: upcomingEvents, icon: <Calendar size={20} />, color: 'var(--text-bright)' },
-              { label: 'Amount Spent', value: `₦${totalSpent.toLocaleString()}`, icon: <BarChart3 size={20} />, color: '#9BA8AB' },
             ]).map((stat, i) => (
               <div key={i} className="rounded-xl p-4 border" style={{ background: 'var(--card)', borderColor: 'var(--border)' }}>
                 <div className="flex justify-between items-start mb-3">
