@@ -158,88 +158,30 @@ function EventsPageInner() {
             <p className="text-sm" style={{ color: 'var(--accent)' }}>Try a different search or category</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {events.map(event => {
               const image = event.coverImageUrl || CATEGORY_IMAGES[event.category] || CATEGORY_IMAGES.OTHER;
               const minPrice = event.tiers?.length ? Math.min(...event.tiers.map(t => t.price)) : 0;
-              const catIcon = CATEGORIES.find(c => c.key === event.category);
               return (
                 <Link href={`/events/${event.id}`} key={event.id}>
-                  <div className="rounded-xl overflow-hidden border cursor-pointer group transition-transform hover:-translate-y-1"
-                    style={{ background: 'var(--card)', borderColor: 'var(--border)' }}>
-                    <div className="relative h-40 overflow-hidden">
+                  <div className="cursor-pointer group">
+                    <div className="rounded-2xl overflow-hidden mb-3" style={{ height: '220px' }}>
                       <img src={image} alt={event.title}
-                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
-                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(6,20,27,0.9) 0%, transparent 60%)' }} />
-                      <span className="absolute top-2 left-2 px-2 py-1 rounded font-semibold flex items-center gap-1"
-                        style={{ background: 'var(--bg3)', color: 'var(--text-bright)', fontSize: '9px' }}>
-                        {CATEGORY_LABELS[event.category] || event.category}
-                      </span>
-                      {event.isFree && (
-                        <span className="absolute top-2 right-2 px-2 py-1 rounded font-bold"
-                          style={{ background: 'rgba(46,125,82,0.85)', color: '#5cb87a', fontSize: '9px' }}>
-                          FREE
-                        </span>
-                      )}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
-                    <div className="p-3">
-                      <p className="text-sm font-semibold mb-1 line-clamp-2 leading-snug" style={{ color: 'var(--text-bright)' }}>
-                        {event.title}
-                      </p>
-                      <div className="flex items-center gap-1 mb-1">
-                        <Calendar size={10} style={{ color: 'var(--accent)' }} />
-                        <p style={{ color: 'var(--accent)', fontSize: '10px' }}>
-                          {new Date(event.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' })}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-1 mb-3">
-                        <MapPin size={10} style={{ color: 'var(--accent)' }} />
-                        <p className="truncate" style={{ color: 'var(--accent)', fontSize: '10px' }}>{event.venue}</p>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm font-bold" style={{ color: event.isFree ? '#5cb87a' : 'var(--text-bright)' }}>
-                          {event.isFree ? 'Free' : `₦${minPrice.toLocaleString()}`}
-                        </span>
-                        <button className="text-xs font-bold px-3 py-1 rounded"
-                          style={{ background: 'var(--bg3)', color: 'var(--text-bright)', fontSize: '10px' }}>
-                          {event.isFree ? 'Reserve' : 'Buy'}
-                        </button>
-                      </div>
-                    </div>
+                    <p className="font-bold line-clamp-2 mb-1" style={{ color: 'var(--text-bright)', fontSize: '14px', lineHeight: '1.3' }}>{event.title}</p>
+                    <p style={{ color: 'var(--accent)', fontSize: '12px', marginBottom: '2px' }}>
+                      {new Date(event.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </p>
+                    <p className="truncate" style={{ color: 'var(--accent)', fontSize: '12px', marginBottom: '4px' }}>{event.venue.split(',')[0]}</p>
+                    <p className="font-bold" style={{ color: event.isFree ? '#5cb87a' : 'var(--text-bright)', fontSize: '13px' }}>
+                      {event.isFree ? 'Free' : `₦${minPrice.toLocaleString()}`}
+                    </p>
                   </div>
                 </Link>
               );
             })}
           </div>
-        )}
-
-        {/* PAGINATION */}
-        {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-3 mt-10">
-            <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
-              className="p-2 rounded-lg border disabled:opacity-30"
-              style={{ borderColor: 'var(--border)', color: 'var(--accent)' }}>
-              <ChevronLeft size={16} />
-            </button>
-            {[...Array(totalPages)].map((_, i) => (
-              <button key={i} onClick={() => setPage(i + 1)}
-                className="w-8 h-8 rounded-lg text-xs font-bold border"
-                style={{
-                  background: page === i + 1 ? 'var(--text-bright)' : 'transparent',
-                  color: page === i + 1 ? 'var(--bg)' : 'var(--accent)',
-                  borderColor: 'var(--border)',
-                }}>
-                {i + 1}
-              </button>
-            ))}
-            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
-              className="p-2 rounded-lg border disabled:opacity-30"
-              style={{ borderColor: 'var(--border)', color: 'var(--accent)' }}>
-              <ChevronRight size={16} />
-            </button>
-          </div>
-        )}
-      </div>
     </div>
   );
 }
