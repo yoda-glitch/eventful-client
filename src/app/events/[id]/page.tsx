@@ -68,6 +68,13 @@ export default function EventDetailPage() {
   const [error, setError] = useState('');
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, mins: 0, secs: 0 });
   const [copied, setCopied] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
   const heroBgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -253,7 +260,7 @@ export default function EventDetailPage() {
 
       {/* TICKET TIERS */}
       <div className="px-5 py-5 border-b" style={{ borderColor: 'var(--border)' }}>
-        <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Select a ticket to get started</p>
+        <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Select a ticket to get started</p>
         <div className="flex gap-3 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none' }}>
           {event.tiers.map(tier => {
             const tierAvail = tier.totalQuantity - tier.soldQuantity;
@@ -296,15 +303,15 @@ export default function EventDetailPage() {
 
         {/* DESCRIPTION */}
         {event.description && (
-          <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
+          <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
             <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>Description</p>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--accent)', lineHeight: 1.8 }}>{event.description}</p>
           </div>
         )}
 
         {/* COUNTDOWN */}
-        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
-          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Starts in</p>
+        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
+          <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Starts in</p>
           <div className="grid grid-cols-4 gap-2">
             {[['days', countdown.days], ['hours', countdown.hours], ['mins', countdown.mins], ['secs', countdown.secs]].map(([label, val]) => (
               <div key={label} className="rounded-lg p-2 text-center border" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
@@ -316,8 +323,8 @@ export default function EventDetailPage() {
         </div>
 
         {/* EVENT INFO */}
-        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
-          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Date & time</p>
+        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
+          <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Date & time</p>
           <div className="flex gap-4 mb-2">
             <div className="rounded-lg p-3 border flex-1 text-center" style={{ background: 'var(--bg2)', borderColor: 'var(--border)' }}>
               <p className="text-lg font-bold" style={{ color: 'var(--text-bright)' }}>{new Date(event.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short' })}</p>
@@ -333,8 +340,8 @@ export default function EventDetailPage() {
         </div>
 
         {/* LOCATION MAP */}
-        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
-          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Location</p>
+        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
+          <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Location</p>
           <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-bright)' }}>{event.venue.split(',')[0]}</p>
           <p className="text-xs mb-3" style={{ color: 'var(--accent)' }}>{event.venue}</p>
           <div className="rounded-xl overflow-hidden border" style={{ borderColor: 'var(--border)' }}>
@@ -359,8 +366,8 @@ export default function EventDetailPage() {
 
         {/* GALLERY */}
         {event.galleryImages && event.galleryImages.length > 0 && (
-          <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
-            <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Gallery</p>
+          <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
+            <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Gallery</p>
             <div className="grid grid-cols-2 gap-2">
               {event.galleryImages.map((img, i) => (
                 <div key={i} className="rounded-lg overflow-hidden" style={{ height: '130px', cursor: 'pointer' }}
@@ -375,8 +382,8 @@ export default function EventDetailPage() {
         )}
 
         {/* SHARE */}
-        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)' }}>
-          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Share event</p>
+        <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
+          <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Share event</p>
           <div className="flex gap-3">
             <button onClick={() => handleShare('whatsapp')} title="Share on WhatsApp"
               className="w-10 h-10 rounded-full flex items-center justify-center border transition-all hover:scale-110"
@@ -404,7 +411,7 @@ export default function EventDetailPage() {
         {/* ORGANIZER */}
         {event.organizer && (
           <div className="pb-6" style={{ borderColor: 'var(--border)' }}>
-            <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'var(--accent)' }}>Organized by</p>
+            <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Organized by</p>
             <Link href={`/organizer/${event.organizer.id}`} className="flex items-center gap-3 group">
               <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center text-sm font-bold flex-shrink-0"
                 style={{ background: 'var(--bg3)', color: 'var(--text-bright)' }}>
