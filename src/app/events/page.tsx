@@ -182,6 +182,34 @@ function EventsPageInner() {
               );
             })}
           </div>
+
+        {/* PAGINATION */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-3 mt-10">
+            <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
+              className="p-2 rounded-lg border disabled:opacity-30"
+              style={{ borderColor: 'var(--border)', color: 'var(--accent)' }}>
+              <ChevronLeft size={16} />
+            </button>
+            {[...Array(totalPages)].map((_, i) => (
+              <button key={i} onClick={() => setPage(i + 1)}
+                className="w-8 h-8 rounded-lg text-xs font-bold border"
+                style={{
+                  background: page === i + 1 ? 'var(--text-bright)' : 'transparent',
+                  color: page === i + 1 ? 'var(--bg)' : 'var(--accent)',
+                  borderColor: 'var(--border)',
+                }}>
+                {i + 1}
+              </button>
+            ))}
+            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
+              className="p-2 rounded-lg border disabled:opacity-30"
+              style={{ borderColor: 'var(--border)', color: 'var(--accent)' }}>
+              <ChevronRight size={16} />
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
