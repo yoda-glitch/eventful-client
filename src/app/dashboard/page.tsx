@@ -187,45 +187,45 @@ function DashboardPageInner() {
                   const image = event.coverImageUrl || CATEGORY_IMAGES[event.category] || CATEGORY_IMAGES.OTHER;
                   const isPast = new Date(event.startDate) < new Date();
                   return (
-                    <div key={ticket.id} className="rounded-xl border overflow-hidden flex"
+                    <div key={ticket.id} className="rounded-xl border overflow-hidden"
                       style={{ background: 'var(--card)', borderColor: 'var(--border)' }}>
-                      <div className="relative w-32 flex-shrink-0">
-                        <img src={image} alt={event.title} className="w-full h-full object-cover opacity-70" />
-                        {isPast && (
-                          <div className="absolute inset-0 flex items-center justify-center"
-                            style={{ background: 'rgba(6,20,27,0.7)' }}>
-                            <span className="text-xs font-bold" style={{ color: 'var(--accent)' }}>PAST</span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-4 flex-1">
-                        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
-                          <div>
-                            <p className="font-semibold mb-1" style={{ color: 'var(--text-bright)' }}>{event.title}</p>
-                            <p className="text-xs mb-1 flex items-center gap-1" style={{ color: 'var(--accent)' }}>
-                              <Calendar size={10} />
-                              {new Date(event.startDate).toLocaleDateString('en-NG', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
-                            </p>
-                            <p className="text-xs flex items-center gap-1" style={{ color: 'var(--accent)' }}>
-                              <MapPin size={10} /> {event.venue}
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <span className="inline-block text-xs px-2 py-1 rounded-full mb-2"
+                      <div className="flex">
+                        <div className="relative flex-shrink-0" style={{ width: 100 }}>
+                          <img src={image} alt={event.title} className="w-full h-full object-cover opacity-70" style={{ minHeight: 100 }} />
+                          {isPast && (
+                            <div className="absolute inset-0 flex items-center justify-center"
+                              style={{ background: 'rgba(6,20,27,0.7)' }}>
+                              <span className="text-xs font-bold" style={{ color: 'var(--accent)' }}>PAST</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-3 flex-1 min-w-0">
+                          <div className="flex justify-between items-start gap-2">
+                            <p className="font-semibold text-sm leading-tight" style={{ color: 'var(--text-bright)' }}>{event.title}</p>
+                            <span className="inline-block text-xs px-2 py-0.5 rounded-full flex-shrink-0"
                               style={{
                                 background: ticket.isUsed ? 'rgba(224,85,85,0.1)' : 'rgba(92,184,122,0.1)',
                                 color: ticket.isUsed ? '#e05555' : '#5cb87a',
                               }}>
                               {ticket.isUsed ? 'Used' : 'Valid'}
                             </span>
+                          </div>
+                          <p className="text-xs mt-1 flex items-center gap-1" style={{ color: 'var(--accent)' }}>
+                            <Calendar size={10} />
+                            {new Date(event.startDate).toLocaleDateString('en-NG', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
+                          </p>
+                          <p className="text-xs mt-0.5 flex items-center gap-1 truncate" style={{ color: 'var(--accent)' }}>
+                            <MapPin size={10} /> {event.venue}
+                          </p>
+                          <div className="flex items-center justify-between mt-2">
                             <p className="text-xs" style={{ color: 'var(--accent)' }}>{ticket.tier.name}</p>
+                            <button onClick={() => setQrModal({ hash: ticket.qrCodeHash, title: event.title })}
+                              className="flex items-center gap-1 text-xs px-2 py-1 rounded-lg"
+                              style={{ background: 'var(--bg2)', color: ticket.isUsed ? 'var(--accent)' : 'var(--text-bright)', border: '1px solid var(--border)' }}>
+                              <QrCode size={12} /> QR
+                            </button>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex items-center px-4 border-l" style={{ borderColor: 'var(--border)' }}>
-                        <button onClick={() => setQrModal({ hash: ticket.qrCodeHash, title: event.title })} className="p-2 rounded-lg hover:bg-white/5">
-                          <QrCode size={32} style={{ color: ticket.isUsed ? 'var(--accent)' : 'var(--text-bright)' }} />
-                        </button>
                       </div>
                     </div>
                   );
