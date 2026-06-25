@@ -342,28 +342,29 @@ export default function EventDetailPage() {
         {/* LOCATION MAP */}
         <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
           <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Location</p>
-          <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-bright)' }}>{event.venue.split(',')[0]}</p>
-          <p className="text-xs mb-3" style={{ color: 'var(--accent)' }}>{event.venue}</p>
-          <div className="rounded-xl overflow-hidden border" style={{ borderColor: 'var(--border)' }}>
-            <iframe
-              src={mapUrl}
-              width="100%"
-              height="180"
-              style={{ border: 0, display: 'block' }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={`Map of ${event.venue}`}
-            />
-            <div className="flex justify-between items-center px-3 py-2" style={{ background: 'var(--bg2)' }}>
-              <a href={`https://maps.google.com/maps?q=${encodeURIComponent(event.venue)}`} target="_blank" rel="noopener noreferrer"
-                className="text-xs flex items-center gap-1 px-3 py-1.5 rounded border"
-                style={{ borderColor: 'var(--border)', color: 'var(--accent)', background: 'transparent' }}>
-                Open Maps ↗
-              </a>
+          <div>
+            <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-bright)' }}>{event.venue.split(',')[0]}</p>
+            <p className="text-xs mb-3" style={{ color: 'var(--accent)'}}>{event.venue}</p>
+            <div className="rounded-xl overflow-hidden border" style={{borderColor: 'var(--border)' }}>
+              <iframe
+                src={mapUrl}
+                width="100%"
+                height="180"
+                style={{ border: 0, display: 'block' }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`Map of ${event.venue}`}
+              />
+              <div className="flex justify-between items-center px-3 py-2" style={{ background: 'var(--bg2)' }}>
+                <a href={`https://maps.google.com/maps?q=${encodeURIComponent(event.venue)}`} target="_blank" rel="noopener noreferrer"
+                  className="text-xs flex items-center gap-1 px-3 py-1.5 rounded border"
+                  style={{ borderColor: 'var(--border)', color: 'var(--accent)', background: 'transparent' }}>
+                  Open Maps ↗
+                </a>
+              </div>
             </div>
           </div>
         </div>
-
         {/* GALLERY */}
         {event.galleryImages && event.galleryImages.length > 0 && (
           <div className="pb-6 border-b mb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
