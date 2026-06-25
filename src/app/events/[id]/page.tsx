@@ -413,8 +413,8 @@ export default function EventDetailPage() {
         {event.organizer && (
           <div className="pb-6" style={{ borderColor: 'var(--border)', display: isMobile ? 'block' : 'grid', gridTemplateColumns: '110px 1fr', gap: '20px' }}>
             <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)', marginBottom: isMobile ? '8px' : '0', paddingTop: isMobile ? '0' : '2px' }}>Organized by</p>
-            <Link href={`/organizer/${event.organizer.id}`} className="flex items-center gap-3 group">
             <div>
+            <Link href={`/organizer/${event.organizer.id}`} className="flex items-center gap-3 group">
               <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center text-sm font-bold flex-shrink-0"
                 style={{ background: 'var(--bg3)', color: 'var(--text-bright)' }}>
                 {event.organizer.avatarUrl
