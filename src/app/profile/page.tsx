@@ -162,7 +162,7 @@ export default function ProfilePage() {
       {drawerOpen && (
         <div style={{ position: "fixed", inset: 0, zIndex: 50 }}>
           <div onClick={() => setDrawerOpen(false)} style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 260, background: 'var(--bg2)', borderRight: '1px solid var(--border)', padding: 20, overflowY: 'auto' }}>
+          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 260, background: 'var(--bg2)', borderLeft: '1px solid var(--border)', padding: 20, overflowY: 'auto' }}>
             <div className="flex justify-end mb-4">
               <button onClick={() => setDrawerOpen(false)} style={{ color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer' }}>
                 <X size={18} />
