@@ -10,11 +10,21 @@ import api from '@/lib/api';
 function VerifyEmailPageInner() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
+  const statusParam = searchParams.get('status');
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [countdown, setCountdown] = useState(3);
 
   useEffect(() => {
-    if (token) {
+    if (statusParam === 'success') {
+      setStatus('success');
+      let count = 3;
+      const timer = setInterval(() => {
+        count -= 1;
+        setCountdown(count);
+        if (count === 0) { clearInterval(timer); window.location.href = '/auth/login'; }
+      }, 1000);
+      return () => clearInterval(timer);
+    } else if (token) {
       api.get('/auth/verify-email/' + token)
         .then(() => {
           setStatus('success');
