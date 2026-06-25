@@ -35,7 +35,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="flex items-center gap-6" style={{ display: typeof window !== "undefined" && window.innerWidth < 768 ? "none" : "flex" }}>
           <Link href="/" className="text-xs tracking-wider uppercase hover:text-white transition-colors" style={{ color: 'var(--accent)' }}>Home</Link>
           <Link href="/events" className="text-xs tracking-wider uppercase hover:text-white transition-colors" style={{ color: 'var(--accent)' }}>Browse</Link>
           {isAuthenticated && (
@@ -78,7 +78,7 @@ export default function Navbar() {
           )}
 
           {/* Mobile hamburger */}
-          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden" style={{ color: 'var(--text-bright)', background: 'none', border: 'none', cursor: 'pointer' }}>
+          <button onClick={() => setMenuOpen(!menuOpen)} style={{ color: "var(--text-bright)", background: "none", border: "none", cursor: "pointer", display: "block" }}>
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
