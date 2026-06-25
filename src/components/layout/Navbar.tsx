@@ -55,7 +55,7 @@ export default function Navbar() {
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          {isAuthenticated && (
+          {isAuthenticated && !isMobile && (
             <Link href="/notifications" style={{ position: 'relative', display: 'flex' }}>
               <Bell size={18} style={{ color: 'var(--accent)' }} />
               {unreadCount > 0 && (
