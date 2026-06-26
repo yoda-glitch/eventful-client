@@ -322,6 +322,7 @@ export default function HomePage() {
           </div>
         ))}
         </div>
+      </FadeIn>
 
       {/* ORGANIZER CTA */}
       <FadeIn direction="none" delay={0.1}>
