@@ -305,7 +305,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-        </div></div>
+        </div>
       </div>
       </FadeIn>
       {/* STATS */}
@@ -343,6 +343,7 @@ export default function HomePage() {
               style={{ borderColor: 'rgba(204,208,207,0.4)', color: '#fff' }}>
               Browse Events
             </Link>
+          </div>
           </div>
         </div>
       </div>
