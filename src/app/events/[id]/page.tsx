@@ -222,10 +222,7 @@ export default function EventDetailPage() {
         <button onClick={() => router.back()} className="flex items-center gap-1 text-xs" style={{ color: 'var(--accent)' }}>
           <ChevronLeft size={14} /> Back
         </button>
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded flex items-center justify-center font-bold text-xs" style={{ background: 'var(--text-bright)', color: 'var(--bg)' }}>E</div>
-          <span className="text-xs font-bold tracking-widest uppercase" style={{ color: '#fff' }}>Eventful</span>
-        </Link>
+        <div style={{ width: 60 }} />
         <button onClick={() => handleShare('copy')} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border"
           style={{ borderColor: 'var(--border)', color: 'var(--accent)', background: 'rgba(204,208,207,0.04)' }}>
           <Share2 size={12} /> {copied ? 'Copied!' : 'Share'}

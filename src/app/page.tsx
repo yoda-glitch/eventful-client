@@ -347,8 +347,14 @@ export default function HomePage() {
       <footer className="border-t py-8 px-8" style={{ borderColor: 'var(--border)' }}>
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded flex items-center justify-center font-bold text-xs" style={{ background: 'var(--text-bright)', color: 'var(--bg)' }}>E</div>
-            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: 'var(--text-bright)' }}>Eventful</span>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="6" fill="var(--text-bright)" fillOpacity="0.08"/>
+              <circle cx="10" cy="13" r="2.5" fill="var(--text-bright)"/>
+              <circle cx="16" cy="11" r="2.5" fill="var(--text-bright)"/>
+              <circle cx="22" cy="12" r="2.5" fill="var(--text-bright)"/>
+              <path d="M7 22 Q10 14 13 18 Q16 22 19 14 Q21 9 25 16" fill="none" stroke="var(--text-bright)" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+            <span style={{ color: 'var(--text-bright)', fontFamily: 'Georgia, serif', fontSize: '17px', fontWeight: 400, letterSpacing: '0.5px' }}>Event<em style={{ fontWeight: 700 }}>ful</em></span>
           </div>
           <div className="flex gap-6">
             {['Privacy', 'Terms', 'Support', 'Browse Events'].map(l => (
