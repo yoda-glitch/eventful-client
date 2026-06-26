@@ -233,7 +233,7 @@ export default function EventDetailPage() {
       </nav>
 
       {/* HERO */}
-      <div className="relative overflow-hidden" style={{ height: '520px' }}>
+      <div className="relative overflow-hidden mx-4 mt-4 rounded-2xl" style={{ height: "520px" }}>
         <div ref={heroBgRef} className="absolute"
           style={{ inset: '-20px', backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(6,20,27,0.1) 0%, rgba(6,20,27,0.55) 55%, rgba(6,20,27,1) 100%)' }} />
