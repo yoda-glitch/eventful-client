@@ -228,6 +228,7 @@ export default function HomePage() {
       {/* TESTIMONIALS */}
       <FadeIn delay={0.1}>
       <div className="py-12 px-8 border-t" style={{ borderColor: 'var(--border)' }}>
+        <div className="max-w-6xl mx-auto">
         <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>What organizers say</p>
         <h2 className="text-2xl font-bold mb-10" style={{ color: 'var(--text-bright)', fontFamily: 'var(--font-heading)' }}>Trusted by organizers everywhere</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px" }}>
@@ -254,58 +255,61 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+        </div>
       </div>
       </FadeIn>
       {/* HOW IT WORKS */}
       <FadeIn delay={0.1}>
       <div className="py-12 px-8 border-t" style={{ borderColor: 'var(--border)' }}>
-        <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>How it works</p>
-        <h2 className="text-2xl font-bold mb-10" style={{ color: 'var(--text-bright)' }}>Sell out your event in 3 steps</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "32px", marginBottom: "40px" }}>
-          {[
-            { num: '01', title: 'Create your event', desc: 'Set up your event page in minutes. Add ticket tiers, gallery images, and event details.' },
-            { num: '02', title: 'Sell tickets instantly', desc: 'Accept payments via Paystack. Money lands in your account directly — no delays.' },
-            { num: '03', title: 'Scan at the door', desc: 'Every attendee gets a QR ticket by email. Scan it at the entrance — fast, secure, no fakes.' },
-          ].map((step, i) => (
-            <div key={i}>
-              <p className="text-5xl font-bold mb-4" style={{ color: 'var(--accent)', opacity: 0.35 }}>{step.num}</p>
-              <p className="text-sm font-semibold mb-2" style={{ color: 'var(--text-bright)' }}>{step.title}</p>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--accent)' }}>{step.desc}</p>
-            </div>
-          ))}
-        </div>
-        <div className="pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
-          <p className="text-xs tracking-widest uppercase mb-6" style={{ color: 'var(--accent)' }}>Everything you need</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px" }}>
+        <div className="max-w-6xl mx-auto">
+          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>How it works</p>
+          <h2 className="text-2xl font-bold mb-10" style={{ color: 'var(--text-bright)' }}>Sell out your event in 3 steps</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "32px", marginBottom: "40px" }}>
             {[
-              { icon: 'tag', color: 'rgba(92,184,122,0.1)', iconColor: '#5cb87a', title: 'Promo codes', desc: 'Create discount codes for early birds, VIP attendees, or group bookings.' },
-              { icon: 'chart', color: 'rgba(66,133,244,0.1)', iconColor: '#4285F4', title: 'Real-time analytics', desc: 'Track ticket sales, revenue, check-in rates, and attendance live.' },
-              { icon: 'bell', color: 'rgba(240,165,0,0.1)', iconColor: '#f0a500', title: 'Instant notifications', desc: 'Get alerted the moment someone buys a ticket or scans in at the door.' },
-              { icon: 'mail', color: 'rgba(224,85,85,0.1)', iconColor: '#e05555', title: 'Contact organizer', desc: 'Attendees can reach you directly from your event or organizer profile.' },
-              { icon: 'qr', color: 'rgba(139,92,246,0.1)', iconColor: '#8b5cf6', title: 'QR ticket scanning', desc: 'Every ticket gets a unique QR code. Scan at the entrance — fast, secure, no fakes.' },
-              { icon: 'card', color: 'rgba(20,184,166,0.1)', iconColor: '#14b8a6', title: 'Paystack payments', desc: 'Accept payments instantly. Money lands in your account with zero delays.' },
-            ].map((f, i) => (
-              <div key={i} className="flex items-start gap-4 p-5 rounded-2xl" style={{ background: 'var(--bg3)' }}>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: f.color }}>
-                  {f.icon === 'tag' && <Tag size={20} style={{ color: f.iconColor }} />}
-                  {f.icon === 'chart' && <BarChart3 size={20} style={{ color: f.iconColor }} />}
-                  {f.icon === 'bell' && <Bell size={20} style={{ color: f.iconColor }} />}
-                  {f.icon === 'mail' && <Mail size={20} style={{ color: f.iconColor }} />}
-                  {f.icon === 'qr' && <QrCode size={20} style={{ color: f.iconColor }} />}
-                  {f.icon === 'card' && <CreditCard size={20} style={{ color: f.iconColor }} />}
-                </div>
-                <div>
-                  <p className="font-semibold mb-1" style={{ color: 'var(--text-bright)', fontSize: '15px' }}>{f.title}</p>
-                  <p className="leading-relaxed" style={{ color: 'var(--accent)', fontSize: '13px' }}>{f.desc}</p>
-                </div>
+              { num: '01', title: 'Create your event', desc: 'Set up your event page in minutes. Add ticket tiers, gallery images, and event details.' },
+              { num: '02', title: 'Sell tickets instantly', desc: 'Accept payments via Paystack. Money lands in your account directly — no delays.' },
+              { num: '03', title: 'Scan at the door', desc: 'Every attendee gets a QR ticket by email. Scan it at the entrance — fast, secure, no fakes.' },
+            ].map((step, i) => (
+              <div key={i}>
+                <p className="text-5xl font-bold mb-4" style={{ color: 'var(--accent)', opacity: 0.35 }}>{step.num}</p>
+                <p className="text-sm font-semibold mb-2" style={{ color: 'var(--text-bright)' }}>{step.title}</p>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--accent)' }}>{step.desc}</p>
               </div>
             ))}
           </div>
+          <div className="pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
+            <p className="text-xs tracking-widest uppercase mb-6" style={{ color: 'var(--accent)' }}>Everything you need</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px" }}>
+              {[
+                { icon: 'tag', color: 'rgba(92,184,122,0.1)', iconColor: '#5cb87a', title: 'Promo codes', desc: 'Create discount codes for early birds, VIP attendees, or group bookings.' },
+                { icon: 'chart', color: 'rgba(66,133,244,0.1)', iconColor: '#4285F4', title: 'Real-time analytics', desc: 'Track ticket sales, revenue, check-in rates, and attendance live.' },
+                { icon: 'bell', color: 'rgba(240,165,0,0.1)', iconColor: '#f0a500', title: 'Instant notifications', desc: 'Get alerted the moment someone buys a ticket or scans in at the door.' },
+                { icon: 'mail', color: 'rgba(224,85,85,0.1)', iconColor: '#e05555', title: 'Contact organizer', desc: 'Attendees can reach you directly from your event or organizer profile.' },
+                { icon: 'qr', color: 'rgba(139,92,246,0.1)', iconColor: '#8b5cf6', title: 'QR ticket scanning', desc: 'Every ticket gets a unique QR code. Scan at the entrance — fast, secure, no fakes.' },
+                { icon: 'card', color: 'rgba(20,184,166,0.1)', iconColor: '#14b8a6', title: 'Paystack payments', desc: 'Accept payments instantly. Money lands in your account with zero delays.' },
+              ].map((f, i) => (
+                <div key={i} className="flex items-start gap-4 p-5 rounded-2xl" style={{ background: 'var(--bg3)' }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: f.color }}>
+                    {f.icon === 'tag' && <Tag size={20} style={{ color: f.iconColor }} />}
+                    {f.icon === 'chart' && <BarChart3 size={20} style={{ color: f.iconColor }} />}
+                    {f.icon === 'bell' && <Bell size={20} style={{ color: f.iconColor }} />}
+                    {f.icon === 'mail' && <Mail size={20} style={{ color: f.iconColor }} />}
+                    {f.icon === 'qr' && <QrCode size={20} style={{ color: f.iconColor }} />}
+                    {f.icon === 'card' && <CreditCard size={20} style={{ color: f.iconColor }} />}
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-1" style={{ color: 'var(--text-bright)', fontSize: '15px' }}>{f.title}</p>
+                    <p className="leading-relaxed" style={{ color: 'var(--accent)', fontSize: '13px' }}>{f.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-            </FadeIn>
-            {/* STATS */}
-            <FadeIn delay={0.1}>
+      </FadeIn>
+      {/* STATS */}
+      <FadeIn delay={0.1}>
       <div className="grid grid-cols-3 border-t border-b" style={{ borderColor: 'var(--border)' }}>
         {[
           { target: 20, suffix: '+', label: 'Events hosted' },
@@ -317,9 +321,9 @@ export default function HomePage() {
             <p className="text-xs" style={{ color: 'var(--accent)' }}>{stat.label}</p>
           </div>
         ))}
+        </div>
       </div>
 
-      </FadeIn>
       {/* ORGANIZER CTA */}
       <FadeIn direction="none" delay={0.1}>
       <div className="relative overflow-hidden px-8 py-16 border-b" style={{ borderColor: 'var(--border)' }}>
