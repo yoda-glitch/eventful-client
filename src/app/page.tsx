@@ -305,7 +305,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-        </div>
+        </div></div>
       </div>
       </FadeIn>
       {/* STATS */}
@@ -326,9 +326,9 @@ export default function HomePage() {
 
       {/* ORGANIZER CTA */}
       <FadeIn direction="none" delay={0.1}>
-      <div className="relative overflow-hidden py-16 border-b" style={{ borderColor: 'var(--border)' }}>
+      <div className="relative overflow-hidden px-8 py-16 border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0d2535 0%, var(--bg) 60%)' }} />
-        <div className="relative z-10 max-w-lg">
+        <div className="relative z-10 max-w-6xl mx-auto"><div className="max-w-lg">
           <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'rgba(204,208,207,0.7)' }}>For organizers</p>
           <h2 className="text-3xl font-bold mb-3 leading-tight" style={{ color: '#fff' }}>Ready to host your<br/>next event?</h2>
           <p className="text-sm mb-8 leading-relaxed" style={{ color: 'rgba(204,208,207,0.8)' }}>
