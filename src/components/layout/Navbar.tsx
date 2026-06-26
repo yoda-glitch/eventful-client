@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useTheme } from '@/lib/theme';
-import { Sun, Moon, Ticket, Bell, LogOut, Menu, X } from 'lucide-react';
+import { Sun, Moon, Bell, LogOut, Menu, X } from 'lucide-react';
 import { useAuth } from '@/lib/auth';
 import { useState, useEffect } from 'react';
 import api from '@/lib/api';
@@ -35,8 +35,14 @@ export default function Navbar() {
       <div className="px-6 h-14 flex items-center justify-between">
 
         <Link href="/" className="flex items-center gap-2">
-          <Ticket size={20} style={{ color: 'var(--text-bright)' }} />
-          <span className="text-sm font-bold tracking-widest uppercase" style={{ color: 'var(--text-bright)' }}>Eventful</span>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="6" fill="var(--text-bright)" fillOpacity="0.08"/>
+            <circle cx="10" cy="13" r="2.5" fill="var(--text-bright)"/>
+            <circle cx="16" cy="11" r="2.5" fill="var(--text-bright)"/>
+            <circle cx="22" cy="12" r="2.5" fill="var(--text-bright)"/>
+            <path d="M7 22 Q10 14 13 18 Q16 22 19 14 Q21 9 25 16" fill="none" stroke="var(--text-bright)" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+          <span style={{ color: 'var(--text-bright)', fontFamily: 'Georgia, serif', fontSize: '17px', fontWeight: 400, letterSpacing: '0.5px' }}>Event<em style={{ fontWeight: 700 }}>ful</em></span>
         </Link>
 
         {/* Desktop links */}
