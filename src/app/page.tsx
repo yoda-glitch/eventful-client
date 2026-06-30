@@ -331,7 +331,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-6xl mx-auto"><div className="max-w-lg">
           <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'rgba(204,208,207,0.7)' }}>For organizers</p>
           <h2 className="text-3xl font-bold mb-3 leading-tight" style={{ color: '#fff' }}>Ready to host your<br/>next event?</h2>
-          <p className="text-sm mb-8 leading-relaxed" style={{ color: 'rgba(204,208,207,0.8)' }}>
+          <p className="text-sm mb-8 leading-relaxed" style={{ color: 'rgba(255,255,255,0.85)' }}>
             Join organizers across Nigeria selling out concerts, conferences, and meetups — with zero stress and full control.
           </p>
           <div className="flex gap-3 mb-8">
